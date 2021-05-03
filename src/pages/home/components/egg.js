@@ -6,7 +6,7 @@ import day1 from '../../../assets/shop/day1.png';
 import close from '../../../assets/video/close.svg';
 import egg from '../../../assets/video/egg.mp4';
 
-export default () => {
+export default (props) => {
   return <div className="egg">
     <div className="egg-left">
       <img src={egg1} alt=""></img>
@@ -18,7 +18,7 @@ export default () => {
     <div className="line">&nbsp;</div>
     <div className="egg-right">
       <div>
-        <img src={close} alt=""></img>
+        <img onClick={() => props.onClose()} src={close} alt=""></img>
       </div>
       <div className="egg-right-title">农家土鸡蛋</div>
       <video width="332" controls src={egg}></video>
