@@ -129,13 +129,16 @@ const Home = function () {
     console.log(event.results[0][0].transcript, 'onresult');
     const result = event.results[0][0].transcript;
     setTaskList([...taskList, result]);
-    if (result === '我想买一盒鸡蛋') {
+    if (result.indexOf('一盒鸡蛋') !== -1) {
       const reply = '你想买什么类型的鸡蛋呢?';
       const utterThis = new window.SpeechSynthesisUtterance(reply);
       window.speechSynthesis.speak(utterThis);
       setTaskList([...taskList, result, reply]);
       setIsAskForEgg(true);
-    } else {
+    } else if (result.indexOf('随便看看') !== -1) {
+      setIsRandom(true);
+    }
+    else {
       const utterThis = new window.SpeechSynthesisUtterance(
         '对不起, 我不知道您在说什么'
       );
