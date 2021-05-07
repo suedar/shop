@@ -52,14 +52,14 @@
     justify-content: space-between;
     padding-right: 20px;
     .button {
-      background: #262a32;
-      padding: 25px;
+      // background: #262a32;
+      // padding: 25px;
       border-radius: 50%;
       z-index: 2;
     }
     img {
-      width: 34px;
-      height: 34px;
+      width: 104px;
+      height: 104px;
     }
     .footer-right {
       display: flex;
@@ -73,6 +73,9 @@
       margin-right: -355px;
       border-radius: 40px;
       animation: gogogo 2s linear forwards;
+      background-color:#272727;
+      border-top-left-radius: 40px;
+      border-bottom-left-radius: 40px;
       @keyframes gogogo {
         0%{
           margin-right: -355px;
@@ -140,7 +143,7 @@
         }
         &:nth-of-type(even) {
           float: right;
-          background-color: #74c996;
+          background: linear-gradient(156.68deg, #52CE93 19.33%, rgba(39, 129, 86, 0.76) 95.05%);
         }
 
         &:nth-of-type(odd) {
@@ -342,4 +345,10 @@
   .product-container-content-product-item-on-sell {
     visibility: hidden;
   }
+}
+
+.add-bg {
+  background: url(../../assets/menu/background.svg);
+  background-size: contain;
+  background-color: #000000;
 }

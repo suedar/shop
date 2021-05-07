@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
+import c from 'classnames';
 
 import location from '../../assets/menu/icon-location.svg';
 import setting from '../../assets/menu/setting.svg';
 import bag from '../../assets/menu/bag.svg';
 import audio from '../../assets/menu/audio.svg';
-import line from '../../assets/menu/line1.png';
+import line from '../../assets/menu/line.svg';
 import arrow from '../../assets/menu/arrow.svg';
 import sort from '../../assets/menu/sort.svg';
 
@@ -120,8 +121,8 @@ const Home = function () {
   const newRecognition = new window.webkitSpeechRecognition();
   const [taskList, setTaskList] = useState([
     '你有什么想买的吗?',
-    // '我想买一盒鸡蛋',
-    // '你想买什么类型的鸡蛋呢?',
+    '我想买一盒鸡蛋',
+    '你想买什么类型的鸡蛋呢?',
   ]);
   newRecognition.continuous = true;
 
@@ -129,7 +130,7 @@ const Home = function () {
     console.log(event.results[0][0].transcript, 'onresult');
     const result = event.results[0][0].transcript;
     setTaskList([...taskList, result]);
-    if (result.indexOf('一盒鸡蛋') !== -1) {
+    if (result.indexOf('鸡蛋') !== -1) {
       const reply = '你想买什么类型的鸡蛋呢?';
       const utterThis = new window.SpeechSynthesisUtterance(reply);
       window.speechSynthesis.speak(utterThis);
@@ -339,7 +340,9 @@ const Home = function () {
     );
   };
   return (
-    <div className="home">
+    <div className={c("home", {
+      'add-bg': !isProduct
+    })}>
       <div className="home-container">{renderContent()}</div>
       <div className="footer">
         <div className="footer-left">
@@ -352,7 +355,7 @@ const Home = function () {
           {isListening && (
             <img ref={lineRef} className="line" src={line} alt=""></img>
           )}
-          {isAskForEgg && (
+          {isAskForEgg && !isListening && (
             <div className="more">
               {['农家土鸡蛋', '绿壳土鸡蛋', '查看更多'].map((item, index) => {
                 return (
