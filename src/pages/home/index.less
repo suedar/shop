@@ -58,8 +58,8 @@
       z-index: 2;
     }
     img {
-      width: 104px;
-      height: 104px;
+      width: 75px;
+      height: 75px;
     }
     .footer-right {
       display: flex;
@@ -72,7 +72,8 @@
       width: 355px;
       margin-right: -355px;
       border-radius: 40px;
-      animation: gogogo 2s linear forwards;
+      // animation: gogogo 2s linear forwards;
+      animation: gogogo 2s linear;
       background-color:#272727;
       border-top-left-radius: 40px;
       border-bottom-left-radius: 40px;
@@ -191,7 +192,7 @@
         padding-top: 28px;
         padding-left: 16px;
         display: flex;
-        overflow-x: scroll;
+        overflow-x: hidden;
         &-item {
           min-width: 140px;
           height: 175px;
@@ -315,6 +316,7 @@
             margin-top: -12px;
             display: inline-block;
             margin-bottom: 10px;
+            cursor: pointer;
           }
           &-footer {
             img {

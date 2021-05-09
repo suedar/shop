@@ -81,10 +81,26 @@
   &-footer {
     display: flex;
     align-items: center;
+    position: relative;
+    &::after {
+      content: "3";
+      color: white;
+      position: absolute;
+      left: 56px;
+      top: 32px;
+      width: 16px;
+      height: 16px;
+      text-align: center;
+      line-height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(156.68deg, #52CE93 19.33%, rgba(39, 129, 86, 0.76) 95.05%);
+      z-index: 333;
+    }
     img {
       width: 100px;
       // height: 75px;
       z-index: 5;
+      position: relative;
     }
     div {
       z-index: 3;

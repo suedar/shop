@@ -10,7 +10,7 @@ export default (props) => {
   return <div className="egg">
     <div className="egg-left">
       <img src={egg1} alt=""></img>
-      <div>来自<span>贞记生活超市</span></div>
+      <div>来自<span>{props.shopName}</span></div>
       <div>产自<span>安徽九华山</span></div>
       <div>剩余观赏天数</div>
       <img src={day1} alt=""></img>

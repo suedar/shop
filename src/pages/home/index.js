@@ -3,8 +3,9 @@ import c from 'classnames';
 
 import location from '../../assets/menu/icon-location.svg';
 import setting from '../../assets/menu/setting.svg';
-import bag from '../../assets/menu/bag.svg';
-import audio from '../../assets/menu/audio.svg';
+import bag from '../../assets/menu/bag1.svg';
+import audio from '../../assets/menu/audio5.svg';
+import audio1 from '../../assets/menu/audio6.svg';
 import line from '../../assets/menu/line.svg';
 import arrow from '../../assets/menu/arrow.svg';
 import sort from '../../assets/menu/sort.svg';
@@ -37,29 +38,32 @@ const products = [
   {
     image: egg1,
     title: '农家土鸡蛋',
+    type: 'farm',
     onSellShop: 3,
     price: 56.4,
   },
   {
     image: egg2,
     title: '绿壳乌鸡蛋',
+    type: 'green',
     onSellShop: 4,
     price: 75.5,
   },
   {
     image: egg3,
     title: '黑家土鸡蛋',
+    type: 'dark',
     onSellShop: 2,
     price: 78.4,
   },
   {
     image: egg4,
     title: '有机乌鸡蛋',
+    type: 'organic',
     onSellShop: 1,
     price: 99,
   },
 ];
-
 
 const randoms = [
   {
@@ -88,28 +92,93 @@ const randoms = [
   },
 ];
 
-const shops = [{
-  shopImage: shop1,
-  image: day1,
-  title: '贞记生活超市',
-  price: 56
-}, {
-  shopImage: shop2,
-  image: day2,
-  title: '永辉超市',
-  price: 58
-}, {
-  shopImage: shop3,
-  image: day3,
-  title: '阿昌生活馆',
-  price: 55
-}]
+const shops1 = {
+  farm: {
+    price: 56.4,
+    text: '农家土鸡蛋',
+    list: [{
+    shopImage: shop1,
+    image: day1,
+    title: '贞记生活超市',
+    price: 56
+  }, {
+    shopImage: shop2,
+    image: day2,
+    title: '永辉超市',
+    price: 58
+  }, {
+    shopImage: shop3,
+    image: day3,
+    title: '阿昌生活馆',
+    price: 55
+  }]},
+  green: {
+    text: '绿壳乌鸡蛋',
+    price: 75.5,
+    list: [{
+    shopImage: shop1,
+    image: day1,
+    title: '贞记生活超市',
+    price: 75.5
+  }, {
+    shopImage: shop2,
+    image: day2,
+    title: '永辉超市',
+    price: 58
+  }, {
+    shopImage: shop3,
+    image: day3,
+    title: '阿昌生活馆',
+    price: 55
+  }]},
+  dark: {
+    price: 56.4,
+    text: '农家土鸡蛋',
+    list: [{
+    shopImage: shop1,
+    image: day1,
+    title: '贞记生活超市',
+    price: 56
+  }, {
+    shopImage: shop2,
+    image: day2,
+    title: '永辉超市',
+    price: 58
+  }, {
+    shopImage: shop3,
+    image: day3,
+    title: '阿昌生活馆',
+    price: 55
+  }]},
+  organic: {
+    text: '绿壳乌鸡蛋',
+    price: 75.5,
+    list: [{
+    shopImage: shop1,
+    image: day1,
+    title: '贞记生活超市',
+    price: 75.5
+  }, {
+    shopImage: shop2,
+    image: day2,
+    title: '永辉超市',
+    price: 58
+  }, {
+    shopImage: shop3,
+    image: day3,
+    title: '阿昌生活馆',
+    price: 55
+  }]}
+};
 
 const Home = function () {
   const [isListening, setIsListening] = useState(false);
   const [isAskForEgg, setIsAskForEgg] = useState(false);
   const [isProduct, setIsProduct] = useState(false);
+  const [productName, setProductName] = useState('farm');
+  const [isCheap, setIsCheap] = useState(false);
   const [isShop, setIsShop] = useState(false);
+  const [shopName, setShopName] = useState('贞记生活超市');
   const [isEgg, setIsAgg] = useState(false);
   const [isOrder, setIsOrder] = useState(false);
   const [isRandom, setIsRandom] = useState(false);
@@ -121,8 +190,8 @@ const Home = function () {
   const newRecognition = new window.webkitSpeechRecognition();
   const [taskList, setTaskList] = useState([
     '你有什么想买的吗?',
-    '我想买一盒鸡蛋',
-    '你想买什么类型的鸡蛋呢?',
+    // '我想买一盒鸡蛋',
+    // '你想买什么类型的鸡蛋呢?',
   ]);
   newRecognition.continuous = true;
 
@@ -137,7 +206,18 @@ const Home = function () {
       setTaskList([...taskList, result, reply]);
       setIsAskForEgg(true);
     } else if (result.indexOf('随便看看') !== -1) {
+      setIsCheap(true);
+    } else if (result.indexOf('哪种实惠') !== -1) {
       setIsRandom(true);
+    } else if (result.indexOf('买单') !== -1
+    || result.indexOf('结账吧') !== -1
+    || result.indexOf('我都买什么了') !== -1
+    || result.indexOf('这些要多少钱') !== -1) {
+      setIsOrder(true);
+      const utterThis = new window.SpeechSynthesisUtterance(
+        '您今天挑了一盒农家土鸡蛋，一盒特技香蕉，一盒泰国龙岩，一共181块，现在要结账吗？'
+      );
+      window.speechSynthesis.speak(utterThis);
     }
     else {
       const utterThis = new window.SpeechSynthesisUtterance(
@@ -161,7 +241,9 @@ const Home = function () {
         setIsAskForEgg(false);
         refStart.current = true;
         newRecognition.stop();
-        newRecognition.start();
+        setTimeout(() => {
+          // newRecognition.start();
+        }, 0)
       }
     };
     window.onkeyup = function (e) {
@@ -205,6 +287,8 @@ const Home = function () {
     );
   };
   const renderProduct = () => {
+    
+    const curProduct = isCheap ? products.sort((a, b) => a.price - b.price) : products;
     return (
       <>
         <div className="product-container-content-type">
@@ -216,11 +300,17 @@ const Home = function () {
           <span>筛选</span>
         </div>
         <div className="product-container-content-product">
-          {products.map((item) => {
+          {curProduct.map((item) => {
             return (
               <div
                 className="product-container-content-product-item"
-                onClick={() => setIsShop(true)}
+                onClick={() => {
+                  setIsShop(true); setProductName(item.type);
+                  const utterThis = new window.SpeechSynthesisUtterance(
+                    '你想买哪家店的'
+                  );
+                  window.speechSynthesis.speak(utterThis);
+                }}
               >
                 <div className="product-container-content-product-item-header">
                   <img src={item.image} alt="" />
@@ -248,27 +338,33 @@ const Home = function () {
     );
   };
   const renderShop = () => {
+    const curShop = shops1[productName];
     return <div className="product-container-content-shop">
       <div className="product-container-content-shop-main">
         <img src={egg1} alt="" />
-        <span className="product-container-content-shop-main-title">农家土鸡蛋</span>
+        <span className="product-container-content-shop-main-title">{curShop.text}</span>
         <img className="product-container-content-shop-main-line" src={line1} alt="" />
         <div className="product-container-content-product-item-price">
           <span className="product-container-content-product-item-money">
-            56.4
+            {curShop.price}
           </span>
           &nbsp;/盒(30枚)
         </div>
       </div>
       <div className="line">&nbsp;</div>
-      {shops.map((item, index) => {
+      {curShop.list.map((item, index) => {
         return <div className="product-container-content-shop-item">
           <img src={item.shopImage} alt="" />
-          <span className="product-container-content-shop-item-title">{item.title}</span>
+          <span className="product-container-content-shop-item-title" onClick={
+            () => {
+              setIsAgg(true);
+              setShopName(item.title);
+            }
+          }>{item.title}</span>
           <img src={item.image} alt="" />
           <div className="product-container-content-product-item-price">
             <span className="product-container-content-product-item-money">
-              56.4
+            {item.price}
             </span>
             &nbsp;/盒(30枚)
           </div>
@@ -324,6 +420,7 @@ const Home = function () {
     );
   };
   const renderContent = () => {
+    const curShop = shops1[productName];
     if (!isProduct && !isRandom) {
       return renderStart();
     }
@@ -333,7 +430,7 @@ const Home = function () {
           <div>
             <img onClick={() => isShop ? setIsShop(false) : isRandom ? setIsRandom(false) : setIsProduct(false)} src={arrow} alt="" />
           </div>
-          <div>"{isRandom ? "我想随便逛一逛" : "我想买一盒鸡蛋"}"</div>
+          <div>"{isRandom ? "我想随便逛一逛" : isShop ? curShop.text : isCheap ? "哪种实惠" : "我想买一盒鸡蛋"}"</div>
         </div>
         <div className="product-container-content">{isShop ? renderShop() : isRandom ? renderRandom() : renderProduct()}</div>
       </div>
@@ -367,11 +464,11 @@ const Home = function () {
             </div>
           )}
           <div className="button">
-            <img src={audio} alt=""></img>
+            <img src={isListening ? audio1 : audio} alt=""></img>
           </div>
         </div>}
       </div>
-      {isEgg && <Egg onClose={() => setIsAgg(false)}/>}
+      {isEgg && <Egg shopName={shopName} onClose={() => setIsAgg(false)}/>}
       {isOrder && <Order onClose={() => setIsOrder(false)}/>}
     </div>
   );

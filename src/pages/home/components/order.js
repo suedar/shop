@@ -70,11 +70,22 @@ export default (props) => {
         <span>合计</span>
         <span>{calPrice()}</span>
       </div>
-      {confirm && <img className="code" src={code} />}
+      {confirm && <img className="code" src={code} onClick={() => {
+        const utterThis = new window.SpeechSynthesisUtterance(
+          '支付成功了！大约 3 小时后送达'
+        );
+        window.speechSynthesis.speak(utterThis);
+      }} />}
     </div>
     <div className="order-footer">
       <img src={bag} />
-      <div className="">{confirm ? <>完成支付！大概三小时后送达<span>查看物流信息</span></> :  <>您要购买的是以上商品吗？<span onClick={() => setConfirm(true)}>确认下单</span></>}</div>
+      <div className="">{confirm ? <>完成支付！大概三小时后送达<span>查看物流信息</span></> : <>您要购买的是以上商品吗？<span onClick={() => {
+        setConfirm(true);
+        const utterThis = new window.SpeechSynthesisUtterance(
+          '请扫码结账，商品将配送至浙江省杭州市五常路龙湖冠寓 1225'
+        );
+        window.speechSynthesis.speak(utterThis);
+      }}>确认下单</span></>}</div>
     </div>
   </div>
 }

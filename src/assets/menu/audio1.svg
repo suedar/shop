@@ -1,0 +1,42 @@
+<svg width="97" height="105" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="104.85" width="96.8614" y="0.014286" x="0.011429" id="filter0_dd">
+   <feGaussianBlur stdDeviation="3.99429"/>
+   <feGaussianBlur stdDeviation="1.99714"/>
+  </filter>
+  <filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="80.2729" width="74.2815" y="9.30712" x="11.3014" id="filter1_ii">
+   <feGaussianBlur stdDeviation="1.99714"/>
+   <feGaussianBlur stdDeviation="0.998571"/>
+  </filter>
+  <filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="45.9547" width="45.1293" y="27.4648" x="26.2902" id="filter2_d">
+   <feGaussianBlur stdDeviation="1.99714"/>
+  </filter>
+  <linearGradient y2="1.000001" x2="0.5" y1="0" x1="0.5" id="paint0_linear">
+   <stop stop-color="#1C222B"/>
+   <stop stop-color="#1B212C" offset="1"/>
+  </linearGradient>
+  <linearGradient y2="1.000001" x2="0.5" y1="0" x1="0.5" id="paint1_linear">
+   <stop stop-color="#22262D"/>
+   <stop stop-color="#272D37" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1" filter="url(#filter0_dd)">
+   <circle id="svg_2" fill="url(#paint0_linear)" r="40.4421" cy="50.4421" cx="48.4421"/>
+  </g>
+  <g id="svg_3" filter="url(#filter1_ii)">
+   <circle id="svg_4" fill="url(#paint1_linear)" r="37.1407" cy="50.4421" cx="48.4421"/>
+  </g>
+  <g id="svg_5" filter="url(#filter2_d)">
+   <rect id="svg_6" fill="#68DEA6" rx="2.47605" height="18.983" width="4.9521" y="43.8394" x="30.2845"/>
+   <rect id="svg_7" fill="#68DEA6" rx="2.47605" height="28.8872" width="4.9521" y="31.4591" x="41.014"/>
+   <rect id="svg_8" fill="#68DEA6" rx="2.47605" height="28.0619" width="4.9521" y="41.3633" x="51.7436"/>
+   <rect id="svg_9" fill="#68DEA6" rx="2.47605" height="18.983" width="4.9521" y="39.7126" x="62.4731"/>
+  </g>
+ </g>
+</svg>
