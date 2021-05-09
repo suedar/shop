@@ -242,7 +242,7 @@ const Home = function () {
         refStart.current = true;
         newRecognition.stop();
         setTimeout(() => {
-          // newRecognition.start();
+          newRecognition.start();
         }, 0)
       }
     };
